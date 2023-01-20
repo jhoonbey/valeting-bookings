@@ -1,0 +1,38 @@
+﻿<div class="span2 main-menu-span">
+    <div class="well nav-collapse sidebar-nav" style="padding: 12px;">
+        <ul class="nav nav-tabs nav-stacked main-menu" style="margin-bottom: 0px;">
+            <li>
+                <a class="ajax-link" href="@Url.Action("Index", "Dashboard", new { area = "Admin" })" style="padding-right: 5px; padding-left: 5px;">
+                    <i class="icon icon-red icon-globe"></i><span class="hidden-tablet">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a class="ajax-link" href="@Url.Action("Index", "Bookings", new { area = "Admin" })" style="padding-right: 5px; padding-left: 5px;">
+                    <i class="icon icon-red icon-book"></i><span class="hidden-tablet">Bookings</span>
+                </a>
+            </li>
+        </ul>
+        <label id="for-is-ajax" class="hidden-tablet" for="is-ajax" style="visibility: hidden; margin-bottom: 0px;">
+            <input id="is-ajax" type="checkbox" checked="checked" />
+        </label>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".dropdown-menu > li > a.trigger").on("click", function (e) {
+            var current = $(this).next();
+            var grandparent = $(this).parent().parent();
+            if ($(this).hasClass('left-caret') || $(this).hasClass('right-caret'))
+                $(this).toggleClass('right-caret left-caret');
+            grandparent.find('.left-caret').not(this).toggleClass('right-caret left-caret');
+            grandparent.find(".sub-menu:visible").not(current).hide();
+            current.toggle();
+            e.stopPropagation();
+        });
+        $(".dropdown-menu > li > a:not(.trigger)").on("click", function () {
+            var root = $(this).closest('.dropdown');
+            root.find('.left-caret').toggleClass('right-caret left-caret');
+            root.find('.sub-menu:visible').hide();
+        });
+    });
+</script>

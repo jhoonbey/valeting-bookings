@@ -1,0 +1,55 @@
+﻿@model BookingEntity
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header well" data-original-title>
+            <h2><i class="icon icon-red icon-edit"></i>Edit Vision</h2>
+        </div>
+        <div class="box-content">
+            @using (Html.BeginForm("Edit", "Bookings", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.BookingDate)
+                @Html.HiddenFor(model => model.Status)
+
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="focusedInput">Name</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="focusedInput">Flexibility</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.Flexibility)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="focusedInput">Vehicle Size</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(o => o.VehicleSize, Enum.GetValues(typeof(VehicleSize)).Cast<VehicleSize>().
+                       Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }))
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="focusedInput">Contact Number</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.ContactNumber)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="focusedInput"> Email Address</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.EmailAddress)
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a class="btn" href="@Url.Action("Index", "Bookings" )">Cancel</a>
+                    </div>
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>

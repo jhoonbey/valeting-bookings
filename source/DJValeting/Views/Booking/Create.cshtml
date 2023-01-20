@@ -1,0 +1,71 @@
+﻿@model BookingEntity
+
+<br />
+<h2 class="text-info">Create Book</h2>
+<br />
+
+<div class="border container" style="padding:30px;">
+    @using (Html.BeginForm("Create", "Booking", FormMethod.Post))
+    {
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Flexibility"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Flexibility" class="form-control" />
+                <span asp-validation-for="Flexibility" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="VehicleSize"></label>
+            </div>
+            <div class="col-6">
+                @Html.DropDownListFor(o => o.VehicleSize, Enum.GetValues(typeof(VehicleSize)).Cast<VehicleSize>().
+                Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }))
+                <span asp-validation-for="VehicleSize" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ContactNumber"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="ContactNumber" class="form-control" />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="EmailAddress"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="EmailAddress" class="form-control" />
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <button type="submit" class="btn btn-primary form-control">
+                    Create
+                </button>
+            </div>
+            <div class="col-3">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-success form-control">Back to Home</a>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

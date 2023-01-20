@@ -1,0 +1,92 @@
+﻿@model IEnumerable<BookingViewModel>
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header well" data-original-title>
+            <a href="@Url.Action("Create", "Bookings", new { area = "Admin" })" class="btn btn-small btn-success btn-round" style="float: right; margin-right: 10px;">Create</a>
+            <h2><i class="icon icon-red icon-book"></i>Bookings</h2>
+        </div>
+        <div class="box-content">
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Booking date</th>
+                        <th>Flexibility</th>
+                        <th>Vehicle Size</th>
+                        <th>Contact Number</th>
+                        <th>Email Address</th>
+                        <th>Status</th>
+                        <th style="width: 20%; text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                @item.Name
+                            </td>
+                            <td style="width: 100px; text-align: center; vertical-align: middle;">
+                                @item.BookingDate.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture)
+                            </td>
+                            <td style="vertical-align: middle;">
+                               +/- @item.Flexibility Day(s)
+                            </td>
+                            <td style="vertical-align: middle;">
+                                @item.VehicleSize
+                            </td>
+                            <td style="vertical-align: middle;">
+                                @item.ContactNumber
+                            </td>
+                            <td style="vertical-align: middle;">
+                                @item.EmailAddress
+                            </td>
+                            <td style="vertical-align: middle;">
+                                @if (item.Status)
+                                {
+                                    <span class="label-success label label-default">Approved</span>
+                                }
+                                else
+                                {
+                                    <span class="label-default label label-danger">Unapproved</span>
+                                }
+                            </td>
+
+                            <td class="center" style="width: 25%; text-align: center; vertical-align: middle;">
+                                <a class="btn btn-round btn-warning" onclick="confirmApprove(@item.Id)" style="">
+                                    <i class="icon-ok icon-white"></i>
+                                    Approve
+                                </a>
+                                <a class="btn btn-round btn-danger" onclick="confirmDelete(@item.Id)" style="">
+                                    <i class="icon-trash icon-white"></i>
+                                    Delete
+                                </a>
+                                <a class="btn btn-round  btn-info" href="@Url.Action("Edit", "Bookings", new { id = item.Id })">
+                                    <i class="icon-edit icon-white"></i>
+                                    Edit
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function confirmDelete(id) {
+        if (confirm("Are you sure to delete this Booking?")) {
+            document.location.href = '@Url.Action("Delete", "Bookings", new { area = "Admin" })/' + id;
+        }
+    }
+
+    function confirmApprove(id) {
+        if (confirm("Are you sure to approve this Booking?")) {
+            document.location.href = '@Url.Action("Approve", "Bookings", new { area = "Admin" })/' + id;
+        }
+    }
+</script>
+
+
