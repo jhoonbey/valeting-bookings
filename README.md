@@ -13,8 +13,6 @@ Admin panel is under "Admin" button
 
 - [C#]
 - [ASP.NET Core 3.1 MVC]
-- [ffmpeg] - It is a free tool to cut videos
 - [Jquery]
 - [Bootstrap] - I used HTML template for UI.
 - [SQL Server] - Entity Framework
-
